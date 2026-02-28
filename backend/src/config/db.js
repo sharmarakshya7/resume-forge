@@ -1,12 +1,16 @@
-import mongoose from 'mongoose';
-import config from './env.js';
+import mongoose from "mongoose";
+import config from "./env.js";
 
 export const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(config.mongoUri);
-    console.log(`✅  MongoDB connected: ${conn.connection.host}`);
+    const conn = await mongoose.connect(config.mongoUri, {
+      // optional but helps with some serverless behavior
+      serverSelectionTimeoutMS: 10000,
+    });
+    console.log(` MongoDB connected: ${conn.connection.host}`);
+    return conn;
   } catch (err) {
-    console.error(`❌  MongoDB connection failed: ${err.message}`);
-    process.exit(1);
+    console.error(` MongoDB connection failed: ${err.message}`);
+    throw err;
   }
 };

@@ -1,17 +1,18 @@
-import app from './app.js';
-import config from './config/env.js';
-import { connectDB } from './config/db.js';
+import app from "./app.js";
+import config from "./config/env.js";
+import { connectDB } from "./config/db.js";
 
-// Connect to DB on cold start
-connectDB().catch(console.error);
+// Serverless-friendly: connect on cold start, do not crash the process
+connectDB().catch((err) => {
+  console.error(" DB init failed:", err.message);
+});
 
-// Export app for Vercel (Vercel calls this as a serverless function)
-
+// Export for Vercel serverless
 export default app;
 
-// Also listen normally for local development
-if (process.env.NODE_ENV !== 'production') {
+// Local dev only
+if (process.env.NODE_ENV !== "production") {
   app.listen(config.port, () => {
-    console.log(`🚀  Server running on port ${config.port}`);
+    console.log(`Server running on port ${config.port}`);
   });
 }
