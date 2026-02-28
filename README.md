@@ -1,8 +1,9 @@
 # ResumeForge — Full-Stack ATS Resume Builder
 
 ResumeForge is a production-ready full-stack resume builder designed to generate ATS-friendly resumes with secure authentication and cloud persistence.
-
 It includes a React frontend and a Node.js + Express backend powered by MongoDB.
+
+**Live Demo (Vercel):** https://resume-forge-frontend-eosin.vercel.app/
 
 ### **Overview**
 
